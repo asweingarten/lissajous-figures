@@ -13,12 +13,15 @@ class App extends Component {
     A: 200,
     B: 200,
     alpha: 4.0,
-    beta: 2.0
+    beta: 2.0,
+    delta: Math.PI/2
   }
 
   onGenericChange(prop) {
     return (event) => {
-      this.setState({[prop]: event.target.value});
+      console.log(event.target.value);
+      console.log(`typeof event.target.value ${typeof event.target.value }`);
+      this.setState({[prop]: +event.target.value});
     }
   }
   
@@ -30,8 +33,7 @@ class App extends Component {
   }
 
   render() {
-    let {A, B, alpha, beta} = this.state;
-    let delta = Math.PI/2;
+    let {A, B, alpha, beta, delta} = this.state;
 
     let X = (A, alpha, delta) => (t) => A * Math.sin (alpha * t + delta);
     let Y = (B, beta) => (t) => B * Math.sin (beta * t);
@@ -60,6 +62,7 @@ class App extends Component {
         <label>B:</label><input type="number" onChange={this.onGenericChange("B")} value={B} ></input>
         <label>alpha:</label><input type="number" onChange={this.onGenericChange("alpha")} value={alpha} ></input>
         <label>beta:</label><input type="number" onChange={this.onGenericChange("beta")} value={beta} ></input>
+        <label>delta:</label><input type="number" onChange={this.onGenericChange("delta")} value={delta} ></input>
         <Stage width={window.innerWidth} height={window.innerHeight} fill='#fffbf4'>
           <Layer fill="#fffbf4"
                 x={window.innerWidth/2 - width/2}
